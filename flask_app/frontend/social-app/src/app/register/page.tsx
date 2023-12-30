@@ -4,7 +4,6 @@ import { useForm } from "react-hook-form";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -13,8 +12,9 @@ import {
 import { Input } from "@/components/ui/input";
 import { type RegisterForm, RegisterSchema } from "@/lib/validators/form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { FC } from "react";
 
-export default function RegisterForm() {
+const RegisterForm: FC = () => {
   const form = useForm<RegisterForm>({
     resolver: zodResolver(RegisterSchema),
   });
@@ -26,6 +26,18 @@ export default function RegisterForm() {
   }
 
   return (
+    <>
+    <header>
+      <div className="px-6 py-10 sm:py-10 lg:px-8">
+        <div className="mx-auto max-w-2xl text-center">
+          <h2 className="mt-2 text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">Create an account</h2>
+          <p className="mt-6 text-lg leading-8 text-gray-600">
+            Create an account and join your friends in the Social Circle
+          </p>
+        </div>
+      </div>
+    </header>
+
     <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
@@ -36,7 +48,7 @@ export default function RegisterForm() {
               <FormItem>
                 <FormLabel className="block text-sm font-medium leading-6 text-black">First Name</FormLabel>
                 <FormControl>
-                  <Input placeholder="First Name" {...field} className="block w-full rounded-md border-0 bg-white/5 py-1.5 text-black shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"/>
+                  <Input placeholder="First Name" {...field} className="block w-full border-2 py-1.5 rounded-full  border-slate-500 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -47,13 +59,10 @@ export default function RegisterForm() {
             name="lastName"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Username</FormLabel>
+                <FormLabel>Last Name</FormLabel>
                 <FormControl>
-                  <Input placeholder="Last Name" {...field} />
+                  <Input placeholder="Last Name" {...field} className="block w-full border-2 py-1.5 rounded-full  border-slate-500 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
                 </FormControl>
-                <FormDescription>
-                  This is your public display name.
-                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -63,13 +72,10 @@ export default function RegisterForm() {
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Username</FormLabel>
+                <FormLabel>Email</FormLabel>
                 <FormControl>
-                  <Input placeholder="Email" {...field} />
+                  <Input placeholder="Email" {...field} className="block w-full border-2 py-1.5 rounded-full  border-slate-500 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
                 </FormControl>
-                <FormDescription>
-                  This is your public display name.
-                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -79,13 +85,11 @@ export default function RegisterForm() {
             name="password"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Username</FormLabel>
+                <FormLabel>Password</FormLabel>
                 <FormControl>
-                  <Input placeholder="Password" {...field} />
+                  <Input placeholder="Password" type="password" {...field} className="block w-full border-2 py-1.5 rounded-full  border-slate-500 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
                 </FormControl>
-                <FormDescription>
-                  This is your public display name.
-                </FormDescription>
+
                 <FormMessage />
               </FormItem>
             )}
@@ -95,20 +99,21 @@ export default function RegisterForm() {
             name="confirmPassword"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Username</FormLabel>
+                <FormLabel>Confirm Password</FormLabel>
                 <FormControl>
-                  <Input placeholder="Confirm Password" {...field} />
+                  <Input placeholder="Confirm Password" type="password" {...field} className="block w-full border-2 py-1.5 rounded-full  border-slate-500 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
                 </FormControl>
-                <FormDescription>
-                  This is your public display name.
-                </FormDescription>
+
                 <FormMessage />
               </FormItem>
             )}
           />
-          <Button type="submit">Submit</Button>
+          <Button type="submit" className="flex justify-center rounded-full bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Create Account</Button>
         </form>
       </Form>
     </div>
+  </>
   );
 }
+
+export default RegisterForm;
