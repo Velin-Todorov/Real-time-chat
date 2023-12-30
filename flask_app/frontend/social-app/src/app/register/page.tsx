@@ -111,6 +111,12 @@ const RegisterForm: FC = () => {
           <Button type="submit" className="flex justify-center rounded-full bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Create Account</Button>
         </form>
       </Form>
+      <p className="mt-10 text-center text-sm text-gray-600">
+        Already have an account?
+        <a href="/login" className="font-semibold leading-6 text-indigo-400 hover:text-indigo-300 px-2">
+          Log in to your account
+        </a>
+      </p>
     </div>
   </>
   );
