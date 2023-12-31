@@ -1,7 +1,11 @@
-FROM python:3.11
+FROM python:3.11 as initial_install
 
-WORKDIR /authentication_service
-COPY . /authentication_service
+WORKDIR /backend
+COPY . /backend/
+
+FROM initial_install as initial_install_1
+
+WORKDIR /backend/authentication_service
 
 RUN pip install -r requirements.txt
 EXPOSE 5000
