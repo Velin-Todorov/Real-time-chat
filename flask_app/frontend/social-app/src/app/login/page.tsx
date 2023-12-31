@@ -10,19 +10,28 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { LoginSchema, LoginForm } from "@/lib/validators/form";
+import { LoginForm, LoginSchema } from "@/lib/validators/form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FC } from "react";
 
-const RegisterForm: FC = () => {
+const LoginForm: FC = () => {
   const form = useForm<LoginForm>({
     resolver: zodResolver(LoginSchema),
   });
 
-  function onSubmit(values: any) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
+  async function onSubmit() {
+    const formData = form.getValues()
+
+    const request = await fetch('http://localhost:5000/login', {
+      method: "POST",
+      body: JSON.stringify(formData),
+      headers: {
+        'Content-type':'application/json',
+        'Accept':'application/json',
+      }
+    })
+
+    console.log(request.statusText)
   }
 
   return (
@@ -40,7 +49,6 @@ const RegisterForm: FC = () => {
 
     <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <FormField
             control={form.control}
             name="email"
@@ -70,8 +78,7 @@ const RegisterForm: FC = () => {
             )}
           />
 
-          <Button type="submit" className="flex justify-center rounded-full bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Create Account</Button>
-        </form>
+        <Button onClick={() => {form.handleSubmit(onSubmit)()}} type="submit" className="flex justify-center rounded-full bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Create Account</Button>
       </Form>
       <p className="mt-10 text-center text-sm text-gray-600">
         {`Don't have an account?`}
@@ -84,4 +91,4 @@ const RegisterForm: FC = () => {
   );
 }
 
-export default RegisterForm;
+export default LoginForm;

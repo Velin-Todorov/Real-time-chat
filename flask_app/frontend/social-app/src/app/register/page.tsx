@@ -14,15 +14,33 @@ import { type RegisterForm, RegisterSchema } from "@/lib/validators/form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FC } from "react";
 
+type User = {
+  firstName: string,
+  lastName: string,
+  email: string
+  password: string,
+  confirmPassword: string
+}
+
 const RegisterForm: FC = () => {
   const form = useForm<RegisterForm>({
     resolver: zodResolver(RegisterSchema),
   });
 
-  function onSubmit(values: any) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
+  async function onSubmit() {
+    const formData = form.getValues()
+
+    const request = await fetch('http://localhost:5000/register', {
+      method: "POST",
+      body: JSON.stringify(formData),
+      headers: {
+        'Content-type':'application/json',
+        'Accept':'application/json',
+      }
+    })
+    if (request.status == 200){
+      console.log(request.statusText)
+    }
   }
 
   return (
