@@ -30,7 +30,7 @@ const RegisterForm: FC = () => {
   async function onSubmit() {
     const formData = form.getValues()
 
-    const request = await fetch('http://localhost:5000/register', {
+    const request = await fetch('http://0.0.0.0:5000/auth/register', {
       method: "POST",
       body: JSON.stringify(formData),
       headers: {

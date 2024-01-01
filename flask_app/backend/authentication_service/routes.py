@@ -1,18 +1,19 @@
 from flask import Blueprint, request, jsonify, make_response
-from .models import UserModel
+from models import UserModel
 from werkzeug.security import generate_password_hash
-from authentication_service import db
 from sqlalchemy import exc
+from app import db
 
 auth = Blueprint(
 
     "auth",
-    __name__
+    __name__,
+    url_prefix='/auth'
 )
 
-@auth.route("/login", methods=["POST"])
+@auth.route("/login", methods=["POST", "GET"])
 def login():
-  form_data = request.get_json()
+  # form_data = request.get_json()
 
   return make_response(jsonify({'message': 'hello'}), 200)
 
@@ -29,6 +30,7 @@ def register():
     email=email,
     password=generate_password_hash(password)
   )
+
   try:
     db.session.add(user)
     db.session.commit()
