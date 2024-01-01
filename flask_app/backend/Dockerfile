@@ -8,6 +8,5 @@ FROM initial_install as initial_install_1
 WORKDIR /backend/authentication_service
 
 RUN pip install -r requirements.txt
-EXPOSE 5000
 ENV FLASK_APP=app.py
 CMD [ "flask", "run", "--debug"]
