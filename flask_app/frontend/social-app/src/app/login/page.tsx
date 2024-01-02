@@ -47,7 +47,7 @@ const LoginForm: FC = () => {
       </div>
     </header>
 
-    <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+    <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm space-y-8">
       <Form {...form}>
           <FormField
             control={form.control}
@@ -72,7 +72,6 @@ const LoginForm: FC = () => {
                 <FormControl>
                   <Input placeholder="Password" type="password" {...field} className="block w-full border-2 py-1.5 rounded-full  border-slate-500 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
                 </FormControl>
-
                 <FormMessage />
               </FormItem>
             )}
