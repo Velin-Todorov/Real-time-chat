@@ -22,7 +22,7 @@ const LoginForm: FC = () => {
   async function onSubmit() {
     const formData = form.getValues()
 
-    const request = await fetch('http://0.0.0.0:5000/auth/login', {
+    const request = await fetch('http://localhost:5000/login', {
       method: "POST",
       body: JSON.stringify(formData),
       headers: {

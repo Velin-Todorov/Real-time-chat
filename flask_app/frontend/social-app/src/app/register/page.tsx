@@ -13,16 +13,10 @@ import { Input } from "@/components/ui/input";
 import { type RegisterForm, RegisterSchema } from "@/lib/validators/form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FC } from "react";
-
-type User = {
-  firstName: string,
-  lastName: string,
-  email: string
-  password: string,
-  confirmPassword: string
-}
+import { useRouter } from 'next/navigation'
 
 const RegisterForm: FC = () => {
+  const router = useRouter()
   const form = useForm<RegisterForm>({
     resolver: zodResolver(RegisterSchema),
   });
@@ -39,7 +33,8 @@ const RegisterForm: FC = () => {
       }
     })
     if (request.status == 200){
-      console.log(request.statusText)
+      console.log('Success')
+      router.push('/login')
     }
   }
 
