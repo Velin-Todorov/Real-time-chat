@@ -1,0 +1,29 @@
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
+
+CREATE TABLE user (
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  email VARCHAR (255) NOT NULL,
+  password VARCHAR (255) NOT NULL,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+)
+
+
+CREATE TABLE profile (
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  user_id UUID REFERENCES user(id) ON DELETE CASCADE NOT NULL,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+)
+
+CREATE TRIGGER handle_updated_at
+BEFORE UPDATE ON user
+FOR EACH ROW
+EXECUTE PROCEDURE handle_updated_at();
+
+CREATE TRIGGER handle_updated_at
+BEFORE UPDATE ON profile
+FOR EACH ROW
+EXECUTE PROCEDURE handle_updated_at();
+
