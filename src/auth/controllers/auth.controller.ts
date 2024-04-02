@@ -41,14 +41,15 @@ export class AuthController {
 
   @Post('auth/login')
   async login(@Res() res: Response, @Body() loginUserDto: LoginUserDto) {
-    
     try {
-      const user = await this.userService.getUserByUsername(loginUserDto)
+      const user = await this.userService.getUserByUsername(loginUserDto);
 
-      if (user == -1){
-        throw new Error('User does not exist')
+      if (user == -1) {
+        throw new Error('User does not exist');
       }
-      const check = await this.userService.hashPassword(loginUserDto.password, )
+      const check = await this.userService.hashPassword(loginUserDto.password);
+    } catch (error) {
+      return;
     }
   }
 }
